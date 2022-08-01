@@ -3,10 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { QuickdashComponent } from './components/quickdash/quickdash.component';
+import { LoginComponent } from './components/login/login.component';
+import { InicioComponent } from './components/inicio/inicio.component';
+import { ProyectosComponent } from './components/proyectos/proyectos.component';
+import { TareasComponent } from './components/tareas/tareas.component';
+import { ReunionesComponent } from './components/reuniones/reuniones.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    QuickdashComponent,
+    LoginComponent,
+    InicioComponent,
+    ProyectosComponent,
+    TareasComponent,
+    ReunionesComponent
   ],
   imports: [
     BrowserModule,
