@@ -3,12 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { QuickdashComponent } from './components/quickdash/quickdash.component';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { TareasComponent } from './components/tareas/tareas.component';
 import { ReunionesComponent } from './components/reuniones/reuniones.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +26,8 @@ import { ReunionesComponent } from './components/reuniones/reuniones.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
