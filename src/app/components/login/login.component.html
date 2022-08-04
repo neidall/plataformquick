@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="body">
+
+    <div class="button">
+        <button  mat-icon-button routerLink="/app-quickdash" routerLink="/src/app/components/quickdash">
+          volver
+        </button>
+      </div>
+  
+      
+    <div class="login">
+        <mat-spinner diameter="50" class="spinner" *ngIf="loading"></mat-spinner>
+
+     <form  *ngIf="!loading" [formGroup]="form" (ngSubmit)="Ingresar()">
+        <h1>iniciar seciÃ³n</h1>
+  
+        <mat-label>Usuario</mat-label>
+        <mat-form-field class="ancho" appearance="fill">
+        <input matInput formControlName="usuario">
+        </mat-form-field>
+  
+        <mat-label>ContraseÃ±a</mat-label>
+        <mat-form-field class="ancho" appearance="fill">
+        <input matInput formArrayName="password">
+        </mat-form-field>
+        
+        <br>
+        <button type="submit" class="btn btn-info" >Ingresar</button>
+        
+     </form>
+      <img class="usuarios" src="../../../assets/img/Captura de pantalla 2022-08-03 182838.png" alt="users">
+    </div>
+</div>
