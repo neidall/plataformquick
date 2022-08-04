@@ -10,9 +10,13 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { TareasComponent } from './components/tareas/tareas.component';
 import { ReunionesComponent } from './components/reuniones/reuniones.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+//Angular Material
+import {MatTableModule} from '@angular/material/table';
+import { CrearProyectoComponent } from './components/crear-proyecto/crear-proyecto.component';
+import { VerProyectoComponent } from './components/ver-proyecto/ver-proyecto.component';
 
 @NgModule({
   declarations: [
@@ -22,12 +26,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     InicioComponent,
     ProyectosComponent,
     TareasComponent,
-    ReunionesComponent
+    ReunionesComponent,
+    NavbarComponent,
+    CrearProyectoComponent,
+    VerProyectoComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

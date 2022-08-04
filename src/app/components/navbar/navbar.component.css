@@ -1,0 +1,10 @@
+nav{
+    height: 70px;
+    background-color: rgba(78, 108, 115, 1);
+
+}
+
+nav a{
+    color: #ffff;
+    font-size: 17px;
+}
