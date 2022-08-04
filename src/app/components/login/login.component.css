@@ -1,0 +1,23 @@
+
+.login {
+    text-align: center;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto; 
+}
+  
+
+.ancho {
+    width: 80%;
+}
+
+
+  .usuarios{
+    margin-top: 10%;
+    width: 30%;
+}
+
+
+.spinner {
+    margin: 0 auto;
+  }
