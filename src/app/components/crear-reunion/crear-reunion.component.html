@@ -1,0 +1,48 @@
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Nueva Reunion</h2>                    
+                    <form [formGroup]="form" (ngSubmit)="guardar()">
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Fecha y Hora </label>
+                                <input type="datetime-local" formControlName="fechaHora" class="form-control" id="name" >
+                            </div>
+                            <div class="mb-3">
+                                <label for="tarea" class="form-label">Concepto</label>
+                                <textarea type="text" formControlName="concepto" class="form-control  concept" id="tarea" placeholder=""></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="res" class="form-label">Integrantes</label>
+                                <br>
+                                <mat-form-field appearance="outline">
+                                    <!-- <mat-label>Integrantes</mat-label> -->
+                                    <mat-select formControlName="integrantes" multiple>
+                                      <mat-select-trigger>
+                                        {{this.form.value.integrantes?.[0] || ''}}
+                                        <span *ngIf="(this.form.value.integrantes?.length || 0) > 1" class="example-additional-selection">
+                                          (+{{(this.form.value.integrantes?.length || 0) - 1}} {{this.form.value.integrantes?.length === 2 ? 'other' : 'others'}})
+                                        </span>
+                                      </mat-select-trigger>
+                                      <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                            <div class="mb-3">
+                              <label for="link" class="form-label">Enlace</label>
+                              <input type="text" formControlName="link" class="form-control" id="link" >
+                            </div>
+                            <div class="container">
+                                <button class="btn float-left" routerLink="/reuniones">Volver</button>
+                                <button class="btn float-right" [disabled]="form.invalid">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

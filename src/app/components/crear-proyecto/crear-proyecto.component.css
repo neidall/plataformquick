@@ -1,8 +1,38 @@
-.btn{
+.btn1{
     background-color: rgba(78, 108, 115, 1);
     color: white;
 }
 
+.btn-danger{
+    margin-left: 2%;
+}
+
 .float-right{
     float: right;
+}
+
+
+mat-form-field{
+    width: 100%;
+}
+
+
+.inObject{
+    width: 25%;
+    margin-left: 3%;
+}
+
+
+.inObjecct{
+    width: 34%;
+    display: inline-block;
+    margin-left: 3%;
+
+}
+
+
+.inObjecfech{
+    width: 24%;
+    display: inline-block;
+    margin-left: 3%;    
 }
