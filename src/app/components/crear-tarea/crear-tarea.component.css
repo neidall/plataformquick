@@ -1,0 +1,22 @@
+.btn{
+    background-color: rgba(78, 108, 115, 1);
+    color: white;
+}
+
+.float-right{
+    float: right;
+}
+
+/* .concept{
+    height: 20px;
+} */
+
+
+mat-form-field{
+    width: 100%;
+}
+
+
+.mat-form-field-flex{
+    height: 45px;
+}

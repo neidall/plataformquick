@@ -1,0 +1,70 @@
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Nueva Tarea</h2>                    
+                    <form [formGroup]="form" (ngSubmit)="guardar()">
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Tarea</label>
+                                <input type="text" formControlName="nombre" class="form-control" id="name" >
+                            </div>
+                            <div class="resp">
+                              <label for="fecha" class="form-label">Responsable</label>
+                              <br>
+                              <mat-form-field appearance="outline">
+                                  <mat-select formControlName="responsable">
+                                    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="mb-3">
+                                <label for="res" class="form-label">Integrantes</label>
+                                <br>
+                                <mat-form-field appearance="outline">
+                                    <!-- <mat-label>Integrantes</mat-label> -->
+                                    <mat-select formControlName="integrantes" multiple>
+                                      <mat-select-trigger>
+                                        {{this.form.value.integrantes?.[0] || ''}}
+                                        <span *ngIf="(this.form.value.integrantes?.length || 0) > 1" class="example-additional-selection">
+                                          (+{{(this.form.value.integrantes?.length || 0) - 1}} {{this.form.value.integrantes?.length === 2 ? 'other' : 'others'}})
+                                        </span>
+                                      </mat-select-trigger>
+                                      <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tarea" class="form-label">Concepto</label>
+                                <textarea type="text" formControlName="concepto" class="form-control  concept" id="tarea" placeholder=""></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fecha" class="form-label">Periodicidad</label>
+                                <br>
+                                <mat-form-field appearance="outline">
+                                    <mat-select formControlName="periodicidad">
+                                      <mat-option *ngFor="let opt of periodo" [value]="opt">{{opt}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="mb-3">
+                              <label for="fecha" class="form-label">Importancia</label>
+                              <br>
+                              <mat-form-field appearance="outline">
+                                  <mat-select formControlName="importancia">
+                                    <mat-option *ngFor="let opt of importancia" [value]="opt">{{opt}}</mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="container">
+                                <button class="btn float-left" routerLink="/tareas">Volver</button>
+                                <button class="btn float-right" [disabled]="form.invalid">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

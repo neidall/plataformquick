@@ -5,5 +5,66 @@ table {
 }
 
 .btn{
-    float: right;
+    float: left;
+    height: 50px;
+    margin-top: 3.2px;
+}
+
+/* .select{
+    margin-right: 2px;
+} */
+
+.th1{
+    width: 5%;
+}
+
+.th2{
+    width: 35%;
+}
+
+.th3{
+  width: 10px;
+}
+
+
+td,th{
+    width: 40px;
+} 
+
+mat-form-field{
+    width: 100%;
+}
+
+.mat-form-field-infix{
+    width: 70%;
+}
+
+.verPor{
+    width: 10%;
+    float: left; 
+    margin-left: 4px;
+    margin-top:0;
+}
+
+
+.tablita{
+    margin-top: 50px;
+}
+
+
+/* body {
+    font-family: 'Covered By Your Grace', cursive;
+    line-height: 1.25;
+    
+} */
+  
+  
+@media screen and (max-width: 960px){
+    .verPor{
+        width: 90px;
+    }
+
+    .tablita{
+        margin-top: 60px;
+    }
 }

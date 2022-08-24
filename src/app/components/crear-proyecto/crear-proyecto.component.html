@@ -1,40 +1,64 @@
 <div class="container pt-4">
-    <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="text-center">Nuevo Proyecto</h2>                    
-                    <form action="">
-                        <div class="row">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Nombre del Proyecto</label>
-                                <input type="text" class="form-control" id="name" placeholder="Nombre">
-                            </div>
-                            <div class="mb-3">
-                                <label for="res" class="form-label">Responsable</label>
-                                <select class="form-select " aria-label="Default select example" id="res">
-                                    <option selected></option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="tarea" class="form-label">Tareas</label>
-                                <input type="text" class="form-control" id="tarea" placeholder="tarea1,tarea2...">
-                            </div>
-                            <div class="mb-3">
-                                <label for="fecha" class="form-label">Fecha</label>
-                                <input type="date" class="form-control" id="fecha" placeholder="Nombre">
-                            </div>
-                            <div class="container">
-                                <button class="btn float-left" routerLink="/proyectos">Volver</button>
-                                <button class="btn float-right" routerLink="/crear-proyecto">Guardar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="text-center">Nuevo Proyecto</h2>                    
+          <form [formGroup]="form" (ngSubmit)="guardar()">
+            <div class="row">
+              <div class="mb-3">
+                  <label for="name" class="form-label">Nombre del Proyecto</label>
+                  <input type="text" formControlName="nombre" class="form-control" id="name" >
+              </div>
+              <div class="resp">
+                <label for="fecha" class="form-label">Responsable</label>
+                <br>
+                <mat-form-field appearance="outline">
+                    <mat-select formControlName="responsable">
+                      <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+              </div>
+                
+              <div class="mb-3">
+                <label for="tarea" class="form-label">Objetivos</label>
+                <button type="button" class="btn btn1 float-right" (click)="addObject()" >+</button>
+
+                <div formArrayName="objetivos" id="tarea"  class="mt-4" >
+                  <div *ngFor="let obj of getObjetivos.controls; let i = index" [formGroupName]="i">
+
+                    <input type="text" formControlName="objetivo" class="form-control float-left inObjecct">
+                    <mat-form-field appearance="outline" class="float-left inObject">
+                      <mat-select formControlName="integrants" multiple>
+                        <mat-select-trigger>
+                          {{this.form.value.objetivos[i].integrants?.[0] || ''}}
+                          <span *ngIf="(this.form.value.objetivos[i].integrants?.length || 0) > 1" class="example-additional-selection">
+                            (+{{(this.form.value.objetivos[i].integrants?.length || 0) - 1}} {{this.form.value.objetivos[i].integrants?.length === 2 ? 'other' : 'others'}})
+                          </span>
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                      <input type="date" formControlName="fechao" class="form-control float-left inObjecfech" id="fecha" placeholder="Nombre">
+                      <button type="button" class="btn btn-danger" (click)="removeObjetivo(i)" >x</button>
+                  </div>
+                  </div>
+                  
+                  
+              </div>
+              
+              <div class="mb-3">
+                <label for="fecha" class="form-label">Fecha límite de finalización</label>
+                <input type="date" formControlName="fecha" class="form-control" id="fecha" placeholder="Nombre">
+              </div>
+              <div class="container">
+                <button class="btn btn1 float-left" routerLink="/proyectos">Volver</button>
+                <button [disabled]="form.invalid" class="btn btn1 float-right" routerLink="/crear-proyecto">Guardar</button>
+              </div>
             </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>

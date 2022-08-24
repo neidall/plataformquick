@@ -24,7 +24,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar'; 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
 
+//firebase
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment.prod';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { CrearTareaComponent } from './components/crear-tarea/crear-tarea.component';
+import { CrearReunionComponent } from './components/crear-reunion/crear-reunion.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +45,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     CrearProyectoComponent,
     VerProyectoComponent,
-
+    CrearTareaComponent,
+    CrearReunionComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +59,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatProgressSpinnerModule,
     MatButtonModule,
     MatSliderModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
