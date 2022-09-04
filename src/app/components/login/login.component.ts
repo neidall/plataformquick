@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioI } from 'src/app/interfaces/usuario.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,47 +14,58 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
   form!: FormGroup;
   loading: boolean = false;
+ 
 
 
-  constructor(private fb: FormBuilder , private _snackbar: MatSnackBar, private router: Router) {
+  constructor(private fb: FormBuilder , private _snackbar: MatSnackBar, private router: Router, private authservice : AuthService) {
     this.formularioLogin();
    }
 
   ngOnInit(): void {
   }
 
+
   formularioLogin(): void {
     this.form = this.fb.group({
-      usuario: ['', Validators.required],
-      password: ['quick123', Validators.required]
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
+
 
   Ingresar(): void{
     console.log(this.form.value);
+        this.authservice.login( this.form.value.email, this.form.value.password).then(res =>{
+        console.log('se registro',res);
 
-    const Usuario: UsuarioI = {
-      usuario: this.form.value.usuario,
-      password: this.form.value.password,
-    }
+        if(res !== null){ 
+          this.fakeLoading();
+        }else{
+            this.error()
+            this.form.reset();
+          }
 
-    console.log(Usuario);
-
-    if(Usuario.usuario === 'quick' && Usuario.password === 'quick123'){
-      this.fakeLoading();
-    } else {
-      this.error()
-      this.form.reset();
-    }
+          if(this.form.value.email === 'quick@gmail.com' && this.form.value.password ==='quick123'){ 
+            this.fakeLoadingAdmi();
+          } 
+      
+        
+      })
 
   }
+
+
+
   error(): void{
-    this._snackbar.open('usuario o contraseÃ±a incorrecto', '', {
+    this._snackbar.open('usuario o contraseña incorrecto', '', {
       duration: 5000,
       horizontalPosition: 'center',
-      verticalPosition: 'bottom',
+      verticalPosition: 'top',
+      
     });
   }
+
+
 
   fakeLoading(): void {
     this.loading = true;
@@ -64,8 +76,20 @@ export class LoginComponent implements OnInit {
     }, 1000);
   }
 
+  fakeLoadingAdmi(): void {
+    this.loading = true;
+      //Redireccionamos al inicio
+    setTimeout(() => {
+      this.loading = false;
+      this.router.navigate(['admiQuicK']);
+    }, 1000);
+  }
 
 
 
+  logout(){
+        this.authservice.logout();
+        this.router.navigate(['login']);
+  }
 
 }
