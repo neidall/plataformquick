@@ -8,7 +8,7 @@
         <mat-form-field class="select float-left verPor ml-4" appearance="outline">
          <mat-label>Estado</mat-label>
          <mat-select  [disabled]="disableSelect.value">
-           <mat-option [value]="opt" *ngFor="let opt of opcions " (click)="verPor(opt)">{{opt}}</mat-option> 
+           <mat-option [value]="opt" *ngFor="let opt of opcions ;let i = index " (click)="verPor(i)">{{opt}}</mat-option> 
          </mat-select>
        </mat-form-field>
        <span class="h3">Proyectos</span>
@@ -22,7 +22,7 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Proyecto</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
-                    <mat-option value="option1" *ngFor="let item of items " (click)="ver(item)">{{item.data.nombre}}</mat-option> 
+                    <mat-option value="option1" *ngFor="let item of auxitems" (click)="ver(0,item)">{{item.data.nombre}}</mat-option> 
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -30,15 +30,15 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Responsable</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
-                    <mat-option value="option1" *ngFor="let item of items " (click)="ver(item)">{{item.data.responsable }}</mat-option> 
+                    <mat-option value="option1" *ngFor="let item of auxitems " (click)="ver(1,item)">{{item.data.responsable}}</mat-option> 
                   </mat-select> 
                 </mat-form-field>
               </th>
               <th scope="col" >
                 <mat-form-field class="select" appearance="outline">
-                  <mat-label>Tareas</mat-label>
+                  <mat-label>Objetivos</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
-                    <mat-option value="option1" *ngFor="let item of items " (click)="ver(item)">{{item.data.tareas}}</mat-option> 
+                    <mat-option value="option1" *ngFor="let item of auxitems " (click)="ver(2,item)">{{item.data.objetivos}}</mat-option> 
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -46,7 +46,7 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Integrantes</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
-                    <mat-option value="option1" *ngFor="let item of items " (click)="ver(item)">{{item.data.integrantes}}</mat-option> 
+                    <mat-option value="option1" *ngFor="let item of auxitems " (click)="ver(3,item)">{{item.data.integrantes}}</mat-option> 
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -54,7 +54,7 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Avance</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
-                    <mat-option value="option1" *ngFor="let item of items " (click)="ver(item)">{{item.data.avance}}</mat-option> 
+                    <mat-option value="option1" *ngFor="let item of auxitems " (click)="ver(4,item.data.avance)">{{item.data.avance}}</mat-option> 
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -62,7 +62,7 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Fecha Límite</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
-                    <mat-option value="option1" *ngFor="let item of items " (click)="ver(item)">{{item.data.fechaLimite}}</mat-option> 
+                    <mat-option value="option1" *ngFor="let item of auxitems" (click)="ver(5,item.data.fechaLimite)">{{item.data.fechaLimite}}</mat-option> 
                   </mat-select> 
                 </mat-form-field>
               </th> 
@@ -83,10 +83,10 @@
             <tr *ngFor="let item of items ">
               <td scope="row" ><strong>{{item.data.nombre}}</strong> </td>
               <td scope="row" >{{item.data.responsable}}</td>
-              <td scope="row" >{{item.data.tareas}}</td>
+              <td scope="row" >{{item.data.objetivos}}</td>
               <td scope="row" >{{item.data.integrantes}}</td>
               <td scope="row" >{{item.data.avance}}</td>
-              <td scope="row"  >{{item.data.fecha | date : 'dd/MM/yyyy'}}</td>
+              <td scope="row"  >{{item.data.fechaLimite | date : 'dd/MM/yyyy'}}</td>
             </tr>
             <tr>
             </tr>

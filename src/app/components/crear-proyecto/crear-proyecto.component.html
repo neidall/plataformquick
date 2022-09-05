@@ -24,29 +24,39 @@
                 <label for="tarea" class="form-label">Objetivos</label>
                 <button type="button" class="btn btn1 float-right" (click)="addObject()" >+</button>
 
-                <div formArrayName="objetivos" id="tarea"  class="mt-4" >
-                  <div *ngFor="let obj of getObjetivos.controls; let i = index" [formGroupName]="i">
-
-                    <input type="text" formControlName="objetivo" class="form-control float-left inObjecct">
-                    <mat-form-field appearance="outline" class="float-left inObject">
-                      <mat-select formControlName="integrants" multiple>
-                        <mat-select-trigger>
-                          {{this.form.value.objetivos[i].integrants?.[0] || ''}}
-                          <span *ngIf="(this.form.value.objetivos[i].integrants?.length || 0) > 1" class="example-additional-selection">
-                            (+{{(this.form.value.objetivos[i].integrants?.length || 0) - 1}} {{this.form.value.objetivos[i].integrants?.length === 2 ? 'other' : 'others'}})
-                          </span>
-                        </mat-select-trigger>
-                        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                      <input type="date" formControlName="fechao" class="form-control float-left inObjecfech" id="fecha" placeholder="Nombre">
-                      <button type="button" class="btn btn-danger" (click)="removeObjetivo(i)" >x</button>
+                <div formArrayName="listObjetivos" id="tarea"  class="mt-4" >
+                  <div class="card border-bottom mb-3" *ngFor="let obj of getObjetivos.controls; let i = index" [formGroupName]="i">
+                    <div class="card-header">
+                      <button type="button" class="btn-close float-right"  aria-label="Close" (click)="removeObjetivo(i)"></button>
+                    </div>
+                    <div class="card-body">
+                    <div class="mb-3">
+                      <label for="objO" class="form-label">Objetivo</label>
+                      <input type="text" formControlName="objetivo" class="form-control" id="objO" >
+                    </div>
+                    <div class="float-left form1">
+                      <label for="int" class="form-label">Integrantes</label>
+                      <br>
+                      <mat-form-field appearance="outline" class="float-left inObject" id="int">
+                        <mat-select formControlName="integrants" multiple>
+                          <mat-select-trigger>
+                            {{this.form.value.listObjetivos[i].integrants?.[0] || ''}}
+                            <span *ngIf="(this.form.value.listObjetivos[i].integrants?.length || 0) > 1" class="example-additional-selection">
+                              (+{{(this.form.value.listObjetivos[i].integrants?.length || 0) - 1}} {{this.form.value.listObjetivos[i].integrants?.length === 2 ? 'other' : 'others'}})
+                            </span>
+                          </mat-select-trigger>
+                          <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="float-left form2 ">
+                      <label for="fechaO" class="form-label">Fecha límite</label>
+                      <input type="date" formControlName="fechao" class="form-control float-left inObjecfech" id="fechaO" placeholder="Nombre">
+                    </div>
+                    </div>
                   </div>
                   </div>
-                  
-                  
               </div>
-              
               <div class="mb-3">
                 <label for="fecha" class="form-label">Fecha límite de finalización</label>
                 <input type="date" formControlName="fecha" class="form-control" id="fecha" placeholder="Nombre">
