@@ -1,5 +1,5 @@
 
-    <nav class="navbar navbar-expand-lg bg-white"  *ngIf="logeado == true" >
+    <nav class="navbar navbar-expand-lg bg-white"  *ngIf="logeado == true && rol === 'usuario' "  >
       <div class="container-fluid">
         <a class="navbar-brand" routerLink="/inicio">
           <img src="../../../assets/img/QUICK 2.jpg" alt="" width="100" height="58" class="d-inline-block align-text-top">
@@ -43,4 +43,32 @@
       </ul>
     </div>
   </div>
+</nav>
+
+
+<nav class="navbar navbar-expand-lg bg-white"  *ngIf="logeado == true && rol === 'admin' "  >
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/inicio">
+      <img src="../../../assets/img/QUICK 2.jpg" alt="" width="100" height="58" class="d-inline-block align-text-top">
+    </a>
+
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  
+    <li  class="nav-item" >
+      <a  class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" href="">{{nombre}}</a>
+    </li>
+
+  
+    <li class="nav-item">  
+     <a class="nav-link"  data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"  (click)="logout()" >SALIR</a>
+    </li>
+  </ul>
+</div>
+</div>
 </nav>

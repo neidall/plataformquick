@@ -11,8 +11,8 @@ import { ProyectosService } from 'src/app/services/proyectos.service';
 export class NavbarComponent implements OnInit {
 
   logeado : boolean =false;
-  nombre : any = "juan";
-  rol: any= "";
+  nombre : string = "";
+  rol: string = "";
    
   
   constructor( private authService : AuthService ,private router: Router, private firestore:ProyectosService) {
@@ -52,7 +52,7 @@ getDatosUser(uid : any){
    this.nombre =  res.nombre,
    this.rol = res.cargo
 
-   console.log();
+   console.log(res.cargo);
    
   } {
     

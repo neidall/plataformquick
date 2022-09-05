@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         if(res !== null){ 
           this.fakeLoading();
         }else{
-            this.error()
+            this.error();
             this.form.reset();
           }
 
