@@ -1,32 +1,31 @@
 <div class="body">
-
-    <div class="button">
-        <button  mat-icon-button routerLink="/app-quickdash" routerLink="/src/app/components/quickdash">
-          volver
-        </button>
-      </div>
-  
       
-    <div class="login">
-        <mat-spinner diameter="50" class="spinner" *ngIf="loading"></mat-spinner>
+  <div class="login">
 
-     <form  *ngIf="!loading" [formGroup]="form" (ngSubmit)="Ingresar()">
-        <h1>iniciar seciÃ³n</h1>
-  
-        <mat-label>Usuario</mat-label>
-        <mat-form-field class="ancho" appearance="fill">
-        <input matInput formControlName="usuario">
-        </mat-form-field>
-  
-        <mat-label>ContraseÃ±a</mat-label>
-        <mat-form-field class="ancho" appearance="fill">
-        <input matInput formArrayName="password">
-        </mat-form-field>
-        
-        <br>
-        <button type="submit" class="btn btn-info" >Ingresar</button>
-        
-     </form>
-      <img class="usuarios" src="../../../assets/img/Captura de pantalla 2022-08-03 182838.png" alt="users">
-    </div>
+      <mat-spinner diameter="50" class="spinner" *ngIf="loading"></mat-spinner>
+
+   
+      <form  *ngIf="!loading" [formGroup]="form" (ngSubmit)="Ingresar()">
+         
+          <h1>Iniciar secion</h1>
+         
+          <mat-label>Usuario &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-label>
+          <mat-form-field class="ancho" appearance="outline">
+          <input type="email" matInput formControlName="email" placeholder="Usuario" type="text">
+          </mat-form-field>
+
+          <mat-label>Contraseña &nbsp;&nbsp;&nbsp;</mat-label>
+          <mat-form-field class="ancho" appearance="outline">
+          <input  type="password" matInput formControlName="password" placeholder="contraseña">
+          </mat-form-field>
+      
+          <br>
+          <button type="submit" class="btn btn-info" >Ingresar</button><br>
+          <img class="usuarios" src="../../../assets/img/QUICK 2.jpg" alt="users">
+      </form>
+     
+<!-- 
+      <button (click)="obtenerUsuarioLogeado()">Usuario logeado</button>  -->
+    
+  </div>
 </div>

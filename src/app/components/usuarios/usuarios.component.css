@@ -1,0 +1,45 @@
+.container-usuarios{
+    width: 50%;
+    height: 33rem;
+    background: rgba(19, 19, 18, 0.623);
+    left: 0.5rem;
+    bottom: 0.5rem;
+    text-align: center;
+    overflow: scroll;
+    color: rgb(228, 211, 211);
+
+   
+}
+
+.filtro{
+  
+    margin-top: 5%;
+    position: solid;
+   margin: 1% auto;
+ 
+
+}
+
+h1 {
+    margin: 20px;
+}
+
+.tabla{
+ margin: 45px;
+ text-align: center;
+}
+
+
+.tabla th{
+    width: 15rem;
+    height: 4rem;
+    color: rgb(77, 236, 9);
+    margin: 1rem;
+    
+}
+
+.fff:hover{
+ background-color: rgb(26, 95, 20);
+}
+
+

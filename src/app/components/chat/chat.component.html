@@ -1,0 +1,16 @@
+<div class="card text-center ChatContainer"  >
+    <div class="card-header">
+      <h1>Chat</h1>
+    </div>
+    <p [ngClass]= "{'local': message.messageType === 1, 'remoto': message.messageType === 2 }"  *ngFor="let message of chat.chats">{{message.text}}</p>
+   
+    
+    <div class="inputContainer">
+      <form (ngSubmit)="sendMessage()">
+         <span class="input-group-text" id="basic-addon2">
+          <input type="text" [(ngModel)]="text"[ngModelOptions]="{standalone: true}" ><img class="imgEnviar" src="../../../assets/img/env.png" width="30px" alt="enviar">
+        </span>
+      </form>
+      </div>
+  </div> 
+

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore , CollectionReference, docChanges ,Query} from '@angular/fire/compat/firestore';
+import { UsuarioI } from '../interfaces/usuario.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +11,34 @@ export class ProyectosService {
     
   }
 
-  addProyecto(proyecto:any):Promise<any>{
-    return this.firestore.collection('items').add(proyecto);
+  // addProyecto(proyecto:any):Promise<any>{
+  //   return this.firestore.collection('items').add(proyecto);
+  // }
+
+  createDoc(data:any, path:string , id:string){
+    const collection = this.firestore.collection(path);
+    return collection.doc(id).set(data)
   }
+
+  
+  getDoc<UsuarioI>(path:string , id:string){
+   return this.firestore.collection(path).doc<UsuarioI>(id).valueChanges();
+  }
+
+
 
 
 
   async create(collection: string , dato: any  ) {
     try {
       return await this.firestore.collection(collection).add(dato);
+      
+      
     } catch (error) {
       console.log("error en: create ", error);
       return ;
     }
+        
   }
 
   async getAll(collection:string) {

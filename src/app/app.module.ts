@@ -23,8 +23,11 @@ import {MatInputModule} from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar'; 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+
+import {MatIcon, MatIconModule} from '@angular/material/icon';
+
 
 //firebase
 import { AngularFireModule } from '@angular/fire/compat';
@@ -32,6 +35,11 @@ import { environment } from 'src/environments/environment.prod';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { CrearTareaComponent } from './components/crear-tarea/crear-tarea.component';
 import { CrearReunionComponent } from './components/crear-reunion/crear-reunion.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { AdmiquickComponent } from './components/admiquick/admiquick.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
+import { MatFormField } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -47,6 +55,10 @@ import { CrearReunionComponent } from './components/crear-reunion/crear-reunion.
     VerProyectoComponent,
     CrearTareaComponent,
     CrearReunionComponent,
+    ChatComponent,
+    AdmiquickComponent,
+    UsuariosComponent,
+    CrearUsuarioComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,9 +75,21 @@ import { CrearReunionComponent } from './components/crear-reunion/crear-reunion.
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    MatIconModule,
+    
+
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[ChatComponent],
+
+  // exports: [
+  //   InicioComponent, 
+  //   UsuariosComponent] 
 })
-export class AppModule { }
+export class AppModule {
+ 
+  
+}
