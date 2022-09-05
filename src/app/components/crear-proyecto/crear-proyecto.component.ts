@@ -23,14 +23,14 @@ export class CrearProyectoComponent implements OnInit {
   }
 
   get getObjetivos(){
-    return  this.form.get('objetivos') as FormArray;
+    return  this.form.get('listObjetivos') as FormArray;
   }
 
   cargarForm(){
     this.form = this.fb.group({
-      nombre:['',[Validators.required,Validators.pattern(/^[a-zA-zñÑ\s]+$/)]],
+      nombre:['',[Validators.required]],
       responsable:new FormControl('',Validators.required),
-      objetivos: this.fb.array([]),
+      listObjetivos: this.fb.array([]),
       fecha:['',[Validators.required]],
     })
     
@@ -66,6 +66,7 @@ export class CrearProyectoComponent implements OnInit {
       return;
     }
     let listObjs:any []=[];
+    let listIntegrantes:string []=[];
     let listObj:string []=[];
 
     for (let i = 0; i < this.getObjetivos.length; i++) {
@@ -74,8 +75,10 @@ export class CrearProyectoComponent implements OnInit {
         integrantes : this.getObjetivos.at(i).get('integrants')?.value,
         fecha : this.getObjetivos.at(i).get('fechao')?.value,
       } 
-
+      listObj.push(this.getObjetivos.at(i).get('objetivo')?.value);
+      listIntegrantes = listIntegrantes.concat(this.getObjetivos.at(i).get('integrants')?.value);
       listObjs.push(nuevo);
+      
 
       // this.serviceProy.create('objetivos', nuevo).then(async res =>{
       //   let dir = await res?.path;
@@ -87,19 +90,23 @@ export class CrearProyectoComponent implements OnInit {
     }
 
     console.log(listObjs);
-    
-    for (let j = 0; j < this.getObjetivos.length; j++) {
-      listObj.push(this.getObjetivos.at(j).get('objetivo')?.value);
-    }
-
+    console.log(listObj);
+    console.log(listIntegrantes.filter(function(ele , pos){
+      return listIntegrantes.indexOf(ele) == pos;
+  }) );
+  
     const proyecto:any ={
       nombre:this.form.value.nombre,
       responsable: this.form.value.responsable,
-      integrantes: this.form.value.integrantes,
+      integrantes: listIntegrantes.filter(function(ele , pos){
+        return listIntegrantes.indexOf(ele) == pos;
+    }),
       avance:0,
-      objetivos: listObjs,
-      fecha:this.form.value.fecha,
-      tareas:listObj
+      listaObjetivos: listObjs,
+      fechaCreacion: Date.now(),
+      fechaLimite:this.form.value.fecha,
+      objetivos:listObj,
+      estado:"Pendiente"
     }
 
     
