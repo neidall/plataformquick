@@ -15,12 +15,14 @@ export class ProyectosService {
   //   return this.firestore.collection('items').add(proyecto);
   // }
 
+
+  //servicio para guardar usuarios en la base de datos
   createDoc(data:any, path:string , id:string){
     const collection = this.firestore.collection(path);
     return collection.doc(id).set(data)
   }
 
-  
+  //servicio para obtener usuario
   getDoc<UsuarioI>(path:string , id:string){
    return this.firestore.collection(path).doc<UsuarioI>(id).valueChanges();
   }

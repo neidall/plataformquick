@@ -53,11 +53,48 @@ export class AdmiquickComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-    cambio(valor:any):void{
-      console.log(valor);
-   
-  
+  cambio(valor:any):void{
+    const opt = confirm("Esta seguro de cambiar el estado del usuario?");
+    
+    if (opt === true) {
+      console.log("entro aca true");
+
+      if (valor.data.estado === true) {
+        let user = {
+          cargo: valor.data.cargo,
+          email: valor.data.email,
+          foto: valor.data.foto,
+          nombre: valor.data.nombre,
+          password: valor.data.password,
+          uid: valor.id,
+          estado: false
+        }
+        this.serviceDataUsers.update("usuarios",valor.id,user).then(()=>{
+
+        }).catch(()=> {
+
+        })
+      } else {
+        let user = {
+          cargo: valor.data.cargo,
+          email: valor.data.email,
+          foto: valor.data.foto,
+          nombre: valor.data.nombre,
+          password: valor.data.password,
+          uid: valor.id,
+          estado: true
+        }
+        this.serviceDataUsers.update("usuarios",valor.id,user).then(()=>{
+
+        }).catch(()=> {
+          
+        })
+      }
+    } else {
+      console.log("entro aca");
+      
     }
+  }
   
     }
   

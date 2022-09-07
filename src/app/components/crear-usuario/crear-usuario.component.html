@@ -1,8 +1,9 @@
 
+ <div class="contenido">
+  
  <h1>Crear Usuario</h1>
 
 
- <div class="contenido">
     
  
      <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="Registrar()">
@@ -22,12 +23,7 @@
      <br>
 
     
-     <label class="switch"> Estado<br>
-      <input type="checkbox"  formControlName="estado"  checked="false" (change)="cambio($event)" >
-      <span class="slider round"></span>
-    </label>
      
-     <br>
 
 
      <div class="botones">
