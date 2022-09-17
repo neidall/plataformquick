@@ -1,6 +1,9 @@
 import { Component, Input, OnInit} from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { ProyectosService } from 'src/app/services/proyectos.service';
 
 @Component({
   selector: 'app-chat',
@@ -10,30 +13,42 @@ import { ChatService } from 'src/app/services/chat.service';
 export class ChatComponent implements OnInit {
   text = "";
   opcion:boolean =true;
-  @Input() childMessage!: string;
-//  nuevoMensaje:string = "";
-//  usuarioLogeado:any;
-//  mensajes: any = [
-//   {
-//     emisor:"id",
-//     texto: "hola"
-//   },
-//   {
-//     emisor:"id",
-//     texto: "como estas"
-//   },
-//  ];
-  constructor(public chat:ChatService) { }
+ 
+
+
+  constructor(public chat:ChatService , private user : ProyectosService) {  {
+ 
+  }}
   
   ngOnInit(): void {
-    // this.authService.getUserLogget().subscribe(usuario => this.usuarioLogeado = usuario)
+    
+
+
   }
 
-  sendMessage(){
-    // console.log(this.nuevoMensaje);
-    // this.nuevoMensaje = "";
+
+
+
+ //firebase
+  // async enviar(){
+  //   const res = await this.user.getAll('usuarios').catch(error =>{
+  //     console.log(error);
+  //     })
+  //  console.log(res);
+   
+
+  //     if (res) {
+  //       const mensaje = this.text;
+  //     }
     
-    let messageInfo = {
+   
+  // }
+
+ 
+
+  sendMessage(){
+
+      let messageInfo = {
       text : this.text,
       messageType:1
     };

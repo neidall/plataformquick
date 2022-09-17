@@ -20,6 +20,10 @@
 
 }
 
+img{
+    width: 50px;
+  }
+
 h1 {
     margin: 20px;
 }
@@ -33,7 +37,7 @@ h1 {
 .tabla th{
     width: 15rem;
     height: 4rem;
-    color: rgb(77, 236, 9);
+    color: rgb(134, 160, 124);
     margin: 1rem;
     
 }

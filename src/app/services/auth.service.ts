@@ -38,8 +38,16 @@ export class AuthService {
   
   
 getUserLoged(){
-   return this.autentication.authState;
+  //  return this.autentication.onAuthStateChanged;
+    return this.autentication.authState;
+   
 }
+
+getUserActivo(){
+  return this.autentication.onAuthStateChanged;
+}
+
+
 
 
 

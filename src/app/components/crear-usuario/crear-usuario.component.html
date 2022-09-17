@@ -1,8 +1,9 @@
 
+ <div class="contenido">
+  
  <h1>Crear Usuario</h1>
 
 
- <div class="contenido">
     
  
      <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="Registrar()">
@@ -22,17 +23,12 @@
      <br>
 
     
-     <label class="switch"> Estado<br>
-      <input type="checkbox"  formControlName="estado"  checked="false" (change)="cambio($event)" >
-      <span class="slider round"></span>
-    </label>
      
-     <br>
 
 
      <div class="botones">
        <button type="button" class="btn  btn-success" routerLink="/admiQuicK">volver</button>
-       <button type="submit" class="btn btn-primary">Guardar</button>
+       <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar</button>
      </div>
      </form>
  </div>

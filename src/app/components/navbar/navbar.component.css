@@ -1,14 +1,14 @@
 
 nav a{
     padding: 10px;
-    border-radius: 30%;
+
 }
 
 nav a:hover{
     
     color: rgb(255, 255, 255);
     background-color: rgba(37, 6, 46, 0.897);
-    border-radius: 20%;    
+   
   
 }
 

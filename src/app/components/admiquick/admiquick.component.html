@@ -1,14 +1,8 @@
 
-
+ 
 <button type="button" class="btn btn-dark" routerLink="../crear-usuario">crear +</button>
 
-
-
-
-
-
-
-
+<div class="fondo">
  <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -25,9 +19,10 @@
       <tr *ngFor="let item of usuarios ">
         <td scope="row" ><strong>{{item.data.nombre}}</strong> </td>
         <td scope="row" ><img src="../../../assets/img/user1.png" alt=""></td>
-        <td scope="row" >{{item.data.estado}}</td>
+        <td scope="row" *ngIf="item.data.estado == true" >Habilitado</td>
+        <td scope="row" *ngIf="item.data.estado == false" >Desabilitado</td>
         <td scope="row" ><label class="switch">
-          <input type="checkbox" checked  >
+          <input type="checkbox" checked [checked]="item.data.estado" (change)="cambio(item)" >
           <span class="slider round"></span>
         </label></td>
         
@@ -66,5 +61,7 @@
       </tr> -->
     </tbody>
   </table> 
+
+</div>
 
   

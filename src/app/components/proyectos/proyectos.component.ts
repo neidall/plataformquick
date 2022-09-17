@@ -1,3 +1,4 @@
+import { NgIfContext } from '@angular/common';
 import { Component, OnInit, ViewChild, ɵgetUnknownElementStrictMode } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl } from '@angular/forms';
@@ -5,7 +6,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
-import { ProyectoI } from 'src/app/interfaces/usuario.interface';
+import { ProyectoI, UsuarioI } from 'src/app/interfaces/usuario.interface';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 
 @Component({
@@ -18,40 +20,150 @@ import { ProyectosService } from 'src/app/services/proyectos.service';
 
 export class ProyectosComponent implements OnInit {
 
-  displayedColumns: string[] = ['proyecto', 'responsable', 'objetivos', 'integrantes','avance','fechlimite'];
   opcions:string[] = ['Ver todo','Pendientes','Terminados']
-  auxitems:any []=[];
-  items:any []=[];
+
+  // items:any []=[];
+  // items1:any []=[];
+  objetivos:any []=[];
+  // auxobjetivos:any []=[];
+
   disableSelect = new FormControl(false);
   dataSource;
+  
+  proyectos:any[]=[];
+  auxproyectos:any []=[];
+  uidUser:any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private serviceData:ProyectosService) { 
+  constructor(private serviceDB:ProyectosService, private authService : AuthService) { 
     this.dataSource = new MatTableDataSource();
     
   }
 
   ngOnInit(): void {
-    console.log(this.serviceData.getAll('items'));
-    
-    this.serviceData.getAll('items').then(firebaseResponse => {
+    //-------------UsuarioGlobal----------------------
+    this.authService.getUserLoged().subscribe(res =>{
+
+      if (res) {
+        // console.log('usuario logueago');        
+        // this.logeado = true;
+        this.getDatosUser(res.uid);
+        // console.log(res.uid);
+      }
+      else{
+        // console.log('usuario no logeado');
+        // this.logeado = false;
+      }
+    })
+
+    //----------Proyectos-------------------
+    this.serviceDB.getAll('items').then(firebaseResponse => {
       firebaseResponse?.subscribe(listaDeUsuariosRef => {
 
-        this.items = listaDeUsuariosRef.map(proy => {
+        this.proyectos = listaDeUsuariosRef.map(proy => {
+          let data:any = proy.payload.doc.data(); 
           return {
-            id: proy.payload.doc.id,
-            data: proy.payload.doc.data()
+            id:proy.payload.doc.id,
+            nombre:data.nombre,
+            responsable:data.responsable,
+            estado: data.estado,
+            avance:data.avance,
+            fechaCreacion : data.fechaCreacion,
+            fechaLimite : data.fechaLimite,
+            listObjetivos:[]
           }
         })
-        this.auxitems = listaDeUsuariosRef.map(proy => {
-          return {
-            id: proy.payload.doc.id,
-            data: proy.payload.doc.data()
-          }
+
+
+        //--------Proy------Objetivos------------
+        this.serviceDB.getAll('objetivos').then(firebaseResponse => {
+          firebaseResponse?.subscribe(listaDeUsuariosRef => {
+    
+            this.objetivos = listaDeUsuariosRef.map(proy => {
+              let data:any = proy.payload.doc.data();
+              return {
+                id:         proy.payload.doc.id,
+                idProyecto: data.idProyecto,
+                objetivo:   data.objetivo,
+                integrantes:data.integrantes,
+                fechaLimite:data.fecha
+              }
+            })
+
+            //------------Lista Oficial------------
+            this.proyectos.forEach((item) =>{
+              item.listObjetivos = this.objetivos.filter((elem)=>{
+                  return item.id == elem.idProyecto;
+              })
+            })
+            //-------Filtrando los datos del usuario Logueado || user actual || user active
+            this.proyectos = this.proyectos.filter((proy) =>{
+              if (proy.responsable.id === this.uidUser ) {
+                return proy;
+              }
+              else {
+                let objetivo =  proy.listObjetivos.find((e: any) => {
+                  let rep = e.integrantes.find((inte: any) => {
+                    return inte.id === this.uidUser;
+                  })
+                    console.log(rep);
+                    
+                  if (rep!=null) {
+                    return e;
+                  }
+                }) 
+
+                if (objetivo!=null) {
+                  return proy;
+                }
+
+              }
+            })
+
+           
+            console.log('esta es la lista  oficial',this.proyectos);
+            this.auxproyectos = this.proyectos;
+          })
         })
-        // console.log(this.items[0].data.nombre);
+
 
       })
+    })
+
+
+    //--------------------Objetos------------------
+    // this.serviceDB.getAll('objetivos').then(firebaseResponse => {
+    //   firebaseResponse?.subscribe(listaDeUsuariosRef => {
+
+    //     this.objetivos = listaDeUsuariosRef.map(proy => {
+    //       return {
+    //         id: proy.payload.doc.id,
+    //         data: proy.payload.doc.data()
+    //       }
+    //     })
+    //     // console.log(this.items[0].data.nombre);
+    //   })
+    // })
+
+  }
+
+
+
+  getDatosUser(uid : any){
+    const path = "usuarios";
+    this.uidUser = uid;
+    const id = uid;
+    this.serviceDB.getDoc<UsuarioI>(path, id).subscribe(res=>{
+     console.log( "el res es = " , res);
+     if (res){
+      // this.nombre =  res.nombre,
+      // this.rol = res.cargo
+   
+      console.log(res.cargo);
+      
+     } {
+       
+     }  
     })
   }
 
@@ -63,43 +175,50 @@ export class ProyectosComponent implements OnInit {
     switch (num) {
       case 0:
         //nombre
-        this.items = this.auxitems.filter((elem) => elem.id === element.id);
+
+        this.proyectos = this.auxproyectos.filter((elem) => elem.id === element.id);
       break;
       case 1:
         //responsable
-        this.items = this.auxitems.filter((elem) => elem.data.responsable === element.data.responsable);
+        this.proyectos = this.auxproyectos.filter((elem) => elem.data.responsable === element.data.responsable);
         break;
       case 2:
         //Objetivos
-        this.items = this.auxitems.filter((elem) => elem.data.objetivos === element.data.objetivos);
+        this.proyectos = this.auxproyectos.filter((elem) => elem.data.objetivos === element.data.objetivos);
       break;
       case 3:
         //Integrantes
-        this.items = this.auxitems.filter((elem) => elem.data.integrantes === element.data.integrantes);
+        this.proyectos = this.auxproyectos.filter((elem) => elem.data.integrantes === element.data.integrantes);
+
       break;
       case 4:
         //Avance
         console.log(element);
-        this.items = this.auxitems.filter((elem) => elem.data.avance === element);
+
+        this.proyectos = this.auxproyectos.filter((elem) => elem.data.avance === element);
       break;
       case 5:
         //FechaLimite
-        this.items = this.auxitems.filter((elem) => elem.data.fechaLimite === element);
+        this.proyectos = this.auxproyectos.filter((elem) => elem.data.fechaLimite === element);
+
       break;
     }
   }
 
   verPor(opt:number){
-    let list = this.items;
+
+    console.log(this.proyectos ,this.auxproyectos);
+    
     switch (opt) {
       case 0:
-        this.items = this.auxitems;
+        this.proyectos = this.auxproyectos;
       break;
       case 1:
-        this.items = this.auxitems.filter((elem) => elem.data.estado === "Pendiente");
+        this.proyectos = this.auxproyectos.filter((elem) => elem.data.estado === "Pendiente");
       break;
       default:
-        this.items = this.auxitems.filter((elem) =>elem.data.estado === "Terminado");
+        this.proyectos = this.auxproyectos.filter((elem) =>elem.data.estado === "Terminado");
+
         break;
     }
   }
@@ -111,7 +230,7 @@ export class ProyectosComponent implements OnInit {
 
 
   datos(){
-    this.serviceData.getAll('items').then(firebaseResponse => {
+    this.serviceDB.getAll('items').then(firebaseResponse => {
       firebaseResponse?.subscribe(listaDeUsuariosRef => {
 
         let listaDeUsuarios = listaDeUsuariosRef.map(proy => {
@@ -127,4 +246,3 @@ export class ProyectosComponent implements OnInit {
   }
 
 }
-

@@ -15,14 +15,22 @@ export class ProyectosService {
   //   return this.firestore.collection('items').add(proyecto);
   // }
 
+
+  //servicio para guardar usuarios en la base de datos
   createDoc(data:any, path:string , id:string){
     const collection = this.firestore.collection(path);
     return collection.doc(id).set(data)
   }
 
-  
-  getDoc<UsuarioI>(path:string , id:string){
-   return this.firestore.collection(path).doc<UsuarioI>(id).valueChanges();
+  //servicio para obtener usuario
+    getDoc<tipo>(path:string , id:string){
+    return this.firestore.collection(path).doc<UsuarioI>(id).valueChanges();
+  // try {
+  //   return  this.firestore.collection(path).doc<tipo>(id).valueChanges();
+  // } catch (error) {
+  //   console.log("error en: getById ", error);
+  //   return ;
+  // }
   }
 
 

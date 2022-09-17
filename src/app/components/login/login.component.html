@@ -1,6 +1,6 @@
 <div class="body">
       
-  <div class="login">
+  <div class="login" >
 
       <mat-spinner diameter="50" class="spinner" *ngIf="loading"></mat-spinner>
 
@@ -16,11 +16,15 @@
 
           <mat-label>Contraseña &nbsp;&nbsp;&nbsp;</mat-label>
           <mat-form-field class="ancho" appearance="outline">
-          <input  type="password" matInput formControlName="password" placeholder="contraseña">
-          </mat-form-field>
+          <input  type="password" matInput formControlName="password" placeholder="contraseña" >
+          </mat-form-field><br>
+
+          <!-- <small  *ngIf="passInc">
+            Ingrese una contraseña correcta
+          </small> -->
       
-          <br>
-          <button type="submit" class="btn btn-info" >Ingresar</button><br>
+         
+          <button type="submit" [disabled]="form.invalid" class="btn btn-info" >Ingresar</button><br>
           <img class="usuarios" src="../../../assets/img/QUICK 2.jpg" alt="users">
       </form>
      
