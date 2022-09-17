@@ -28,10 +28,10 @@ export class CrearUsuarioComponent implements OnInit {
   formularioRegisterUser(): void {
     this.form = this.fb.group({
       email: ['', Validators.required],
-      password: ['', Validators.required],
-      nombre:['',[Validators.required,Validators.pattern(/^[a-zA-zñÑ\s]+$/)]],
-      foto:"",
-      estado: ['', Validators.required],
+      password: ['',[Validators.required, Validators.minLength(6), Validators.pattern(/^[a-zA-zñÑ\s]+$/)]],
+      nombre:['',[Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-zñÑ\s]+$/)]],
+     
+      
     });
   }
 

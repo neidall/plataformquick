@@ -16,7 +16,6 @@ import { ProyectosService } from 'src/app/services/proyectos.service';
 export class AdmiquickComponent implements OnInit {
   
   displayedColumns: string[] = ['foto', 'nombre',  'estado', 'acciones'];
-  listaUsuarios: UsuarioDataI[] =[];
   usuarios: any[]=[];
   activo : boolean = false;
   
@@ -26,32 +25,41 @@ export class AdmiquickComponent implements OnInit {
 
     constructor(private serviceDataUsers : ProyectosService, private _snackbar :MatSnackBar, private router:Router) { 
       this.dataSource = new MatTableDataSource();
+
+      
     }
   
 
   ngOnInit(): void {
     // console.log(this.serviceDataUsers.getAll('usuarios'));
     
-    this.serviceDataUsers .getAll('usuarios').then(firebaseResponse => {
+    this.serviceDataUsers.getAll('usuarios').then(firebaseResponse => {
       firebaseResponse?.subscribe(listaDeUsuariosRef => {
-
+        
         this.usuarios = listaDeUsuariosRef.map(proy => {
+          
           return {
             id: proy.payload.doc.id,
             data: proy.payload.doc.data()
           }
         })
       //  console.log(this.usuarios[0].data.nombre);
-
+      
+      
       })
     })
-    
+        
   }
+
+  
+  
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+
 
   cambio(valor:any):void{
     const opt = confirm("Esta seguro de cambiar el estado del usuario?");
@@ -85,7 +93,7 @@ export class AdmiquickComponent implements OnInit {
           estado: true
         }
         this.serviceDataUsers.update("usuarios",valor.id,user).then(()=>{
-
+         
         }).catch(()=> {
           
         })

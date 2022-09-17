@@ -4,67 +4,29 @@
     <div class="filtro" >
     <label >Buscar Usuario</label><br>
   
-      <input  (keyup)="applyFilter($event)" placeholder="buscar">
+      <input  (keyup)="applyFilter($event)" placeholder="buscar" #input>
     
-  </div>
+   </div>
 
 
    <h1> Lista de usuarios </h1>
  
-   <table class="tabla">
+   <table class="tabla" >
           <tr>
              <th >USUARIO</th>
              <th >NOMBRE</th>
              <th>CHAT</th>
          </tr> 
+
+         <tr *ngFor="let item of listaUsuarios ">
+
+          <td scope="row" ><img src="../../../assets/img/userXD.png" alt=""></td>
+          <td scope="row" ><strong>{{item.data.nombre}}</strong> </td>
+          <td ><button  type="button" (click)="activarComponenteChat()"> <i class="fa-solid fa-message"  ></i></button></td>
+           
           
-         <tr class="fff">
-               <td><img src="../../../assets/img/user1.png" alt="user1" width="60px"> </td>
-               <td > Juan Lopez</td>
-               <td ><button  type="button" (click)="activarComponente()"> <i class="fa-solid fa-message"  ></i></button></td>
- 
         </tr>
-
-        <tr class="fff">
-          <td><img src="../../../assets/img/user1.png" alt="user1" width="60px"> </td>
-          <td > Juan Lopez</td>
-          <td ><button  type="button" (click)="activarComponente()"> <i class="fa-solid fa-message"  ></i></button></td>
-
-       </tr> 
-
-       <tr class="fff">
-        <td><img src="../../../assets/img/user1.png" alt="user1" width="60px"> </td>
-        <td > Juan Lopez</td>
-        <td ><button  type="button" (click)="activarComponente()"> <i class="fa-solid fa-message"  ></i></button></td>
-
-     </tr> 
-
-       <tr class="fff">
-        <td><img src="../../../assets/img/user1.png" alt="user1" width="60px"> </td>
-        <td > Juan Lopez</td>
-        <td ><button  type="button" (click)="activarComponente()"> <i class="fa-solid fa-message"  ></i></button></td>
-
-      </tr>
-      
-           <tr class="fff">
-             <td><img src="../../../assets/img/user2.png" alt="user1" width="60px"> </td>
-             <td > Neida </td>
-             <td ><button  type="button" (click)="activarComponente()"> <i class="fa-solid fa-message"  ></i></button></td>
-         </tr>
-         <tr class="fff">
-             <td><img src="../../../assets/img/user3.png" alt="user1" width="60px"> </td>
-             <td > Ever</td>
-             <td ><button  type="button" (click)="activarComponente()"> <i class="fa-solid fa-message"  ></i></button></td>
- 
-         </tr>
-         <tr class="fff">
-            <td><img src="../../../assets/img/user1.png" alt="user1" width="60px"> </td>
-            <td > Carlos</td>
-            <td ><button  type="button" (click)="activarComponente()"> <i class="fa-solid fa-message"  ></i></button></td>
-
-     </tr>
-             
-     </table>
+    </table>
        
    
       </div>

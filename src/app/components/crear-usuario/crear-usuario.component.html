@@ -28,7 +28,7 @@
 
      <div class="botones">
        <button type="button" class="btn  btn-success" routerLink="/admiQuicK">volver</button>
-       <button type="submit" class="btn btn-primary">Guardar</button>
+       <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar</button>
      </div>
      </form>
  </div>

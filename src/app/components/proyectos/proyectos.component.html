@@ -1,4 +1,3 @@
-<!--------------------------------------------------->
 <div class="container mt-4">
   <div class="card">
    <div class="card-body">
@@ -21,7 +20,7 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Proyecto</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
-                    <mat-option value="option1" *ngFor="let item of auxitems" (click)="ver(0,item)">{{item.data.nombre}}</mat-option> 
+                    <mat-option value="option1" *ngFor="let item of auxproyectos" (click)="ver(0,item)">{{item.nombre}}</mat-option> 
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -29,7 +28,7 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Responsable</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
-                    <mat-option value="option1" *ngFor="let item of auxitems " (click)="ver(1,item)">{{item.data.responsable}}</mat-option> 
+                    <mat-option value="option1" *ngFor="let item of auxproyectos " (click)="ver(1,item.responsable)">{{item.responsable.nombre}}</mat-option> 
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -37,7 +36,11 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Objetivos</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
-                    <mat-option value="option1" *ngFor="let item of auxitems " (click)="ver(2,item)">{{item.data.objetivos}}</mat-option> 
+                    <mat-option value="option1" *ngFor="let item of auxproyectos " (click)="ver(2,item.listObjetivos)">
+                      <span *ngFor="let obj of item.listObjetivos">{{obj.objetivo}}
+                        {{ item.listObjetivos[item.listObjetivos.length-1] === obj ? '':  ',' }}
+                      </span>
+                    </mat-option> 
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -45,7 +48,13 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Integrantes</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
-                    <mat-option value="option1" *ngFor="let item of auxitems " (click)="ver(3,item)">{{item.data.integrantes}}</mat-option> 
+                    <mat-option value="option1" *ngFor="let item of auxproyectos " (click)="ver(3,item)">
+                      <span *ngFor="let obj of item.listObjetivos">
+                        <span *ngFor="let integrante of obj.integrantes" >
+                          {{integrante.nombre}}{{ obj.integrantes[obj.integrantes.length-1] === integrante ? '':  ',' }}
+                        </span>
+                      </span>
+                    </mat-option> 
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -53,7 +62,7 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Avance</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
-                    <mat-option value="option1" *ngFor="let item of auxitems " (click)="ver(4,item.data.avance)">{{item.data.avance}}</mat-option> 
+                    <mat-option value="option1" *ngFor="let item of auxproyectos " (click)="ver(4,item.avance)">{{item.avance}}</mat-option> 
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -61,31 +70,36 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Fecha Límite</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
-                    <mat-option value="option1" *ngFor="let item of auxitems" (click)="ver(5,item.data.fechaLimite)">{{item.data.fechaLimite}}</mat-option> 
+                    <mat-option value="option1" *ngFor="let item of auxproyectos" (click)="ver(5,item.fechaLimite)">{{item.fechaLimite}}</mat-option> 
                   </mat-select> 
                 </mat-form-field>
               </th> 
-              <!-- <th scope="col" >
-                <mat-form-field appearance="outline">
-                  <mat-label>Proyecto</mat-label>
-                  <mat-select>
-                    <mat-option *ngFor="let item of items " [value]="item.data.nombre">
-                      {{item.data.nombre}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </th> -->
+              <th scope="col" >
+                <!-- Acciones  -->
+              </th>
               
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of items ">
-              <td scope="row" ><strong>{{item.data.nombre}}</strong> </td>
-              <td scope="row" >{{item.data.responsable}}</td>
-              <td scope="row" >{{item.data.objetivos}}</td>
-              <td scope="row" >{{item.data.integrantes}}</td>
-              <td scope="row" >{{item.data.avance}}</td>
-              <td scope="row"  >{{item.data.fechaLimite | date : 'dd/MM/yyyy'}}</td>
+            <tr *ngFor="let item  of proyectos">
+              <td scope="row" ><strong>{{item.nombre}}</strong> </td>
+              <td scope="row" >{{item.responsable.nombre}}</td>
+              <td scope="row" >
+                <span *ngFor="let obj of item.listObjetivos">{{obj.objetivo}}
+                  {{ item.listObjetivos[item.listObjetivos.length-1] === obj ? '':  ',' }}
+                </span>
+              </td>
+              <td scope="row" >
+                <span *ngFor="let obj of item.listObjetivos">
+                  <span *ngFor="let integrante of obj.integrantes" >
+                    {{integrante.nombre}}{{ obj.integrantes[obj.integrantes.length-1] == integrante ? '':  ',' }}
+                  </span>
+                </span>
+              </td>
+              <td scope="row" >{{item.avance}}</td>
+              <td scope="row"  >{{item.fechaLimite | date : 'dd/MM/yyyy'}}</td>
+              <td scope="row"  *ngIf="uidUser == item.responsable.id">accions</td>
+              <!-- <td scope="row"  *ngIf="uidUser === item.responsable.id" >accions</td> -->
             </tr>
             <tr>
             </tr>

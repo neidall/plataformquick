@@ -23,8 +23,14 @@ export class ProyectosService {
   }
 
   //servicio para obtener usuario
-  getDoc<UsuarioI>(path:string , id:string){
-   return this.firestore.collection(path).doc<UsuarioI>(id).valueChanges();
+    getDoc<tipo>(path:string , id:string){
+    return this.firestore.collection(path).doc<UsuarioI>(id).valueChanges();
+  // try {
+  //   return  this.firestore.collection(path).doc<tipo>(id).valueChanges();
+  // } catch (error) {
+  //   console.log("error en: getById ", error);
+  //   return ;
+  // }
   }
 
 

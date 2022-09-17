@@ -22,35 +22,35 @@ const onlyAdmin = ()=> map((user : any) => !!user && (user.uid === idAdmin));
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const routes: Routes = [
   // {path:'',component: QuickdashComponent},
-  // {path:'login',component: LoginComponent},
-  // {path:'inicio',component: InicioComponent,canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin } },
-  // {path:'admiQuicK',component: AdmiquickComponent, ...canActivate(onlyAdmin)  },
-  // {path:'crear-usuario',component: CrearUsuarioComponent, ...canActivate(onlyAdmin)   },
-  // {path:'proyectos',component: ProyectosComponent , canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin } },
-  // {path:'crear-proyecto',component: CrearProyectoComponent ,canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin } },
-  // {path:'ver-proyecto',component: VerProyectoComponent ,canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin }},
-  // {path:'tareas',component: TareasComponent , canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin } },
-  // {path:'crear-tarea',component: CrearTareaComponent, canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin }},
-  // {path:'reuniones',component: ReunionesComponent, canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin }},
-  // {path:'crear-reunion',component: CrearReunionComponent, canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin }},
-  // {path: '**',redirectTo:'login',pathMatch:'full'},
-  // {path: '',redirectTo:'login',pathMatch:'full'}
-
+   {path:'login',component: LoginComponent},
+   {path:'inicio',component: InicioComponent,canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin } },
+   {path:'admiQuicK',component: AdmiquickComponent, ...canActivate(onlyAdmin),},
+   {path:'crear-usuario',component: CrearUsuarioComponent, ...canActivate(onlyAdmin)   },
+   {path:'proyectos',component: ProyectosComponent , canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin } },
+   {path:'crear-proyecto',component: CrearProyectoComponent ,canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin } },
+   {path:'ver-proyecto',component: VerProyectoComponent ,canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin }},
+   {path:'tareas',component: TareasComponent , canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin } },
+   {path:'crear-tarea',component: CrearTareaComponent, canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin }},
+   {path:'reuniones',component: ReunionesComponent, canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin }},
+   {path:'crear-reunion',component: CrearReunionComponent, canActivate: [AngularFireAuthGuard] , data: { authGuardPipe: redirectUnauthorizedToLogin }},
+   {path: '**',redirectTo:'login',pathMatch:'full'},
+   {path: '',redirectTo:'login',pathMatch:'full'}
+   
  
     // {path:'',component: QuickdashComponent},
-    {path:'',component: LoginComponent}, 
-    {path:'login',component: LoginComponent},
-    {path:'inicio',component: InicioComponent},
-    {path:'admiQuicK',component: AdmiquickComponent},
-    {path:'crear-usuario',component: CrearUsuarioComponent},
-    {path:'proyectos',component: ProyectosComponent},
-    {path:'crear-proyecto',component: CrearProyectoComponent},
-    {path:'ver-proyecto',component: VerProyectoComponent},
-    {path:'tareas',component: TareasComponent},
-    {path:'crear-tarea',component: CrearTareaComponent},
-    {path:'reuniones',component: ReunionesComponent},
-    {path:'crear-reunion',component: CrearReunionComponent},
-    {path: '**',redirectTo:'login',pathMatch:'full'}
+    // {path:'',component: LoginComponent}, 
+    // {path:'login',component: LoginComponent},
+    // {path:'inicio',component: InicioComponent},
+    // {path:'admiQuicK',component: AdmiquickComponent},
+    // {path:'crear-usuario',component: CrearUsuarioComponent},
+    // {path:'proyectos',component: ProyectosComponent},
+    // {path:'crear-proyecto',component: CrearProyectoComponent},
+    // {path:'ver-proyecto',component: VerProyectoComponent},
+    // {path:'tareas',component: TareasComponent},
+    // {path:'crear-tarea',component: CrearTareaComponent},
+    // {path:'reuniones',component: ReunionesComponent},
+    // {path:'crear-reunion',component: CrearReunionComponent},
+    // {path: '**',redirectTo:'login',pathMatch:'full'}
   
   
 ];

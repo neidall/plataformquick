@@ -24,30 +24,35 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get passInc(){
+    return this.form.get('password')?.invalid && this.form.get('password')?.touched;
+  }
+
 
   formularioLogin(): void {
     this.form = this.fb.group({
       email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
 
   Ingresar(): void{
-    console.log(this.form.value);
+    // console.log(this.form.value);
         this.authservice.login( this.form.value.email, this.form.value.password).then(res =>{
-        console.log('se registro',res);
+        console.log('Inicio secion',res);
 
-        if(res !== null){ 
-          this.fakeLoading();
+        if (this.form.value.email === 'quick@gmail.com' && this.form.value.password ==='quick123') {
+          this.fakeLoadingAdmi();
         }else{
+        if(res !== null){ 
+            this.fakeLoading();
+         }else{
             this.error();
             this.form.reset();
           }
+        }
 
-          if(this.form.value.email === 'quick@gmail.com' && this.form.value.password ==='quick123'){ 
-            this.fakeLoadingAdmi();
-          } 
       
         
       })
@@ -87,9 +92,6 @@ export class LoginComponent implements OnInit {
 
 
 
-  logout(){
-        this.authservice.logout();
-        this.router.navigate(['login']);
-  }
+ 
 
 }

@@ -17,7 +17,17 @@ mat-form-field{
 }
 
 
-.inObject{
+
+.form1 ,.form2{
+    width: 46%;
+    display: inline-block;
+}
+
+.form2{
+    margin-left: 3%;
+}
+
+/* .inObject{
     width: 25%;
     margin-left: 3%;
 }
@@ -35,4 +45,4 @@ mat-form-field{
     width: 24%;
     display: inline-block;
     margin-left: 3%;    
-}
+} */
