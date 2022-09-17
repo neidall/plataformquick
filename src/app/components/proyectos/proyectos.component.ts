@@ -21,10 +21,12 @@ import { ProyectosService } from 'src/app/services/proyectos.service';
 export class ProyectosComponent implements OnInit {
 
   opcions:string[] = ['Ver todo','Pendientes','Terminados']
+
   // items:any []=[];
   // items1:any []=[];
   objetivos:any []=[];
   // auxobjetivos:any []=[];
+
   disableSelect = new FormControl(false);
   dataSource;
   
@@ -71,6 +73,7 @@ export class ProyectosComponent implements OnInit {
             listObjetivos:[]
           }
         })
+
 
         //--------Proy------Objetivos------------
         this.serviceDB.getAll('objetivos').then(firebaseResponse => {
@@ -123,6 +126,7 @@ export class ProyectosComponent implements OnInit {
           })
         })
 
+
       })
     })
 
@@ -171,6 +175,7 @@ export class ProyectosComponent implements OnInit {
     switch (num) {
       case 0:
         //nombre
+
         this.proyectos = this.auxproyectos.filter((elem) => elem.id === element.id);
       break;
       case 1:
@@ -184,20 +189,24 @@ export class ProyectosComponent implements OnInit {
       case 3:
         //Integrantes
         this.proyectos = this.auxproyectos.filter((elem) => elem.data.integrantes === element.data.integrantes);
+
       break;
       case 4:
         //Avance
         console.log(element);
+
         this.proyectos = this.auxproyectos.filter((elem) => elem.data.avance === element);
       break;
       case 5:
         //FechaLimite
         this.proyectos = this.auxproyectos.filter((elem) => elem.data.fechaLimite === element);
+
       break;
     }
   }
 
   verPor(opt:number){
+
     console.log(this.proyectos ,this.auxproyectos);
     
     switch (opt) {
@@ -209,6 +218,7 @@ export class ProyectosComponent implements OnInit {
       break;
       default:
         this.proyectos = this.auxproyectos.filter((elem) =>elem.data.estado === "Terminado");
+
         break;
     }
   }

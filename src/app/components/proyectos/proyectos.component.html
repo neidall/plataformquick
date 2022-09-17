@@ -20,7 +20,9 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Proyecto</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
+
                     <mat-option value="option1" *ngFor="let item of auxproyectos" (click)="ver(0,item)">{{item.nombre}}</mat-option> 
+
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -28,7 +30,9 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Responsable</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
+
                     <mat-option value="option1" *ngFor="let item of auxproyectos " (click)="ver(1,item.responsable)">{{item.responsable.nombre}}</mat-option> 
+
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -36,11 +40,13 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Objetivos</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
+
                     <mat-option value="option1" *ngFor="let item of auxproyectos " (click)="ver(2,item.listObjetivos)">
                       <span *ngFor="let obj of item.listObjetivos">{{obj.objetivo}}
                         {{ item.listObjetivos[item.listObjetivos.length-1] === obj ? '':  ',' }}
                       </span>
                     </mat-option> 
+
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -48,6 +54,7 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Integrantes</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
+
                     <mat-option value="option1" *ngFor="let item of auxproyectos " (click)="ver(3,item)">
                       <span *ngFor="let obj of item.listObjetivos">
                         <span *ngFor="let integrante of obj.integrantes" >
@@ -55,6 +62,7 @@
                         </span>
                       </span>
                     </mat-option> 
+
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -62,7 +70,9 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Avance</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
+
                     <mat-option value="option1" *ngFor="let item of auxproyectos " (click)="ver(4,item.avance)">{{item.avance}}</mat-option> 
+
                   </mat-select> 
                 </mat-form-field>
               </th>
@@ -70,7 +80,9 @@
                 <mat-form-field class="select" appearance="outline">
                   <mat-label>Fecha Límite</mat-label>
                   <mat-select  [disabled]="disableSelect.value">
+
                     <mat-option value="option1" *ngFor="let item of auxproyectos" (click)="ver(5,item.fechaLimite)">{{item.fechaLimite}}</mat-option> 
+
                   </mat-select> 
                 </mat-form-field>
               </th> 
@@ -81,6 +93,7 @@
             </tr>
           </thead>
           <tbody>
+
             <tr *ngFor="let item  of proyectos">
               <td scope="row" ><strong>{{item.nombre}}</strong> </td>
               <td scope="row" >{{item.responsable.nombre}}</td>
@@ -100,6 +113,7 @@
               <td scope="row"  >{{item.fechaLimite | date : 'dd/MM/yyyy'}}</td>
               <td scope="row"  *ngIf="uidUser == item.responsable.id">accions</td>
               <!-- <td scope="row"  *ngIf="uidUser === item.responsable.id" >accions</td> -->
+
             </tr>
             <tr>
             </tr>

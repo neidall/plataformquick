@@ -45,7 +45,10 @@
                               (+{{(this.form.value.listObjetivos[i].integrants?.length || 0) - 1}} {{this.form.value.listObjetivos[i].integrants?.length === 2 ? 'other' : 'others'}})
                             </span>
                           </mat-select-trigger>
+
                           <mat-option *ngFor="let user of listUsers" [value]="user">{{user.data.nombre}}</mat-option>
+
+
                         </mat-select>
                       </mat-form-field>
                     </div>

@@ -123,6 +123,7 @@ export class CrearProyectoComponent implements OnInit {
     if(this.form.invalid){
       return;
     }
+
     let idProyecto:any;
     let listIdObjt:any[]=[];
     let listIntegrantes:string []=[];
@@ -133,6 +134,7 @@ export class CrearProyectoComponent implements OnInit {
 
       listObj.push(this.getObjetivos.at(i).get('objetivo')?.value);
       for (let j = 0; j < this.getObjetivos.at(i).get('integrants')?.value.length; j++) {
+
         
         listIntegrantes = listIntegrantes.concat(this.getObjetivos.at(i).get('integrants')?.value[j].data.nombre);
         listIntegrantesPrueba.push({
@@ -140,6 +142,7 @@ export class CrearProyectoComponent implements OnInit {
                                     nombre:listIntegrantesPrueba.concat(this.getObjetivos.at(i).get('integrants')?.value[j].data.nombre,)
                                   })
       }
+
 
     }
   
@@ -158,6 +161,7 @@ export class CrearProyectoComponent implements OnInit {
                     }),
       fechaCreacion:new Date(),
       fechaLimite:  this.form.value.fecha,
+
     }
 
 
